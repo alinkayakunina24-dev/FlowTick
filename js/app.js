@@ -243,7 +243,7 @@
   fitDevice();
   window.addEventListener("resize", fitDevice);
 
-  // The app opens on Home (or the screen open before a reload); the onboarding starts from ?screen=splash
+  // The app opens on the splash (start of the onboarding), or on the screen open before a reload
   // ?theme=dark-water (etc.) switches the theme straight away — handy for checking each one
   const asked = (new URLSearchParams(location.search).get("theme") || "").match(/^(dark|light)-(water|air|metal|earth|fire)$/);
   if (asked) Store.set({ theme: asked[1], element: asked[2] });
@@ -257,5 +257,5 @@
   } catch (e) {}
   if (requested && window.Screens[requested]) app.go(requested);
   else if (last && window.Screens[last.name]) app.go(last.name, { params: last.params });
-  else app.go("home");
+  else app.go("splash");
 })();
