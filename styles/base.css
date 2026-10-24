@@ -1,0 +1,332 @@
+/* Base styles and the device shell shared by every screen */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  -webkit-text-stroke: var(--text-stroke, 0) currentColor;
+  background: var(--neutral-black-100);
+  color: var(--text-white-100);
+  font: var(--type-text-l);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Device ---------- */
+
+/* Phone: the app fills the whole screen */
+.device {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--neutral-black-100);
+}
+
+#app {
+  position: absolute;
+  inset: 0;
+}
+
+/* The phone draws its own status bar and home indicator,
+   so ours are shown only inside the computer preview frame. */
+.status-bar,
+.home-indicator {
+  display: none;
+}
+
+/* Computer: show the app inside a phone frame, like on the Figma canvas.
+   js/app.js sets --device-scale so the frame fits a short window. */
+@media (min-width: 600px) {
+  body {
+    overflow: hidden;
+    background: var(--neutral-screen-grey);
+  }
+
+  .device {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: var(--device-width);
+    height: var(--device-height);
+    transform: translate(-50%, -50%) scale(var(--device-scale, 1));
+    border: 1.5px solid var(--stroke-border-active);
+    border-radius: var(--radius-device);
+    box-shadow: var(--shadow-universal-art);
+  }
+
+  .status-bar {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-hero);
+    padding: var(--spacing-status-padding-vertical) var(--spacing-status-padding-horizontal);
+    pointer-events: none;
+  }
+
+  .status-bar__time {
+    width: 79px;
+    font: var(--type-text-xl);
+    color: var(--system-bars-white);
+    text-align: center;
+  }
+
+  .status-bar__island {
+    width: 79px;
+    height: 13px;
+  }
+
+  .status-bar__signal {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .home-indicator {
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: var(--spacing-header-top-margin) 0;
+    pointer-events: none;
+  }
+
+  .home-indicator__bar {
+    width: 134px;
+    height: 5px;
+    border-radius: var(--radius-small);
+    background: var(--system-bars-white);
+  }
+}
+
+/* ---------- Screens and transitions ---------- */
+
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.screen--fade-in {
+  animation: fade-in 800ms ease-out both;
+}
+
+/* ---------- Transitions (started by js/app.js) ---------- */
+
+:root {
+  --ease-soft: cubic-bezier(0.37, 0, 0.63, 1);
+  /* Slow start and slow finish, so a page never jerks into motion */
+  --ease-page: cubic-bezier(0.55, 0, 0.25, 1);
+  --t-duration: 1400ms;
+}
+
+/* Elements marked data-transition="static" (background decorations) never animate. */
+
+/* "fade": the new screen fades in; the old content is lifted into its own top layer
+   and dissolves at the same time, with a slight blur and 2% scale for depth. */
+.screen--enter-fade {
+  animation: fade-in var(--t-duration) var(--ease-soft) both;
+}
+
+.screen--leave-fade {
+  animation: hold var(--t-duration) linear both;
+  pointer-events: none;
+  /* It keeps the old screen's classes for its content, but not its background:
+     the new screen shows through underneath */
+  background: none !important;
+}
+
+.screen--leave-fade::before {
+  display: none;
+}
+
+/* During a fade the tab bar sits in its own still layer above both pages */
+.screen--chrome {
+  background: none !important;
+  pointer-events: none;
+}
+
+.screen--chrome::before {
+  display: none;
+}
+
+.screen--chrome .tab-bar {
+  pointer-events: auto;
+}
+
+.screen--leave-fade > :not([data-transition="static"]) {
+  animation: fade-content-out var(--t-duration) var(--ease-soft) both;
+}
+
+/* Text and buttons marked data-enter rise in one after another.
+   A screen can slow this down with --enter-step (pause between items)
+   and --enter-length (how long each item takes). */
+.screen--enter-fade [data-enter],
+.screen--enter-reveal [data-enter] {
+  animation: rise-in var(--enter-length, 900ms) var(--ease-soft) both;
+  animation-delay: calc(var(--t-duration) * 0.3 + var(--enter-index, 0) * var(--enter-step, 110ms));
+}
+
+/* Light cross-fade between the main tabs: opacity only, nothing to blur or scale,
+   so it stays smooth even with the glass tab bar on top */
+/* One after the other, never both at once: the old page dissolves in the first
+   ~40%, then the new one appears and its sections rise in */
+.screen--light.screen--leave-fade > :not([data-transition="static"]) {
+  animation: fade-out-early var(--t-duration) var(--ease-soft) both;
+}
+
+.screen--light.screen--enter-fade {
+  animation: fade-in-late var(--t-duration) var(--ease-soft) both;
+}
+
+.screen--light.screen--enter-fade [data-enter] {
+  animation: soft-rise 650ms var(--ease-soft) both;
+  animation-delay: calc(var(--t-duration) * 0.38 + var(--enter-index, 0) * 55ms);
+}
+
+@keyframes fade-out-early {
+  0% { opacity: 1; }
+  40%, 100% { opacity: 0; }
+}
+
+@keyframes fade-in-late {
+  0%, 30% { opacity: 0; }
+  60%, 100% { opacity: 1; }
+}
+
+@keyframes soft-rise {
+  from { opacity: 0; translate: 0 8px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+/* "slide": the new screen slides in from the right over the old one, which drifts
+   left more slowly and darkens; the content trails the background (parallax). */
+.screen--enter-slide {
+  animation: slide-in var(--t-duration) var(--ease-page) both;
+  box-shadow: -12px 0 32px var(--effect-black-alpha-45);
+}
+
+.screen--enter-slide > :not([data-transition="static"]) {
+  animation: parallax-in var(--t-duration) var(--ease-page) both;
+}
+
+.screen--leave-slide {
+  animation: drift-out var(--t-duration) var(--ease-page) both;
+}
+
+/* Going back: the old screen slides off to the right and uncovers the new one */
+.screen--enter-slide-back {
+  animation: drift-in var(--t-duration) var(--ease-page) both;
+}
+
+.screen--leave-slide-back {
+  animation: slide-out var(--t-duration) var(--ease-page) both;
+  box-shadow: -12px 0 32px var(--effect-black-alpha-45);
+}
+
+.screen--leave-slide-back > :not([data-transition="static"]) {
+  animation: parallax-out var(--t-duration) var(--ease-page) both;
+}
+
+/* "dip": everything fades to darkness, then the new screen fades in */
+.screen--leave-dip {
+  animation: dip-out var(--t-duration) var(--ease-soft) both;
+}
+
+.screen--enter-dip {
+  animation: dip-in var(--t-duration) var(--ease-soft) both;
+}
+
+.screen--enter-dip [data-enter] {
+  animation: rise-in var(--enter-length, 900ms) var(--ease-soft) both;
+  animation-delay: calc(var(--t-duration) * 0.55 + var(--enter-index, 0) * var(--enter-step, 110ms));
+}
+
+/* "reveal": the new screen opens as a circle growing from the tapped point */
+.screen--enter-reveal {
+  animation: reveal var(--t-duration) var(--ease-soft) both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hold {
+  to { opacity: 1; }
+}
+
+@keyframes fade-content-out {
+  to { opacity: 0; scale: 1.02; filter: blur(4px); }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; translate: 0 14px; filter: blur(3px); }
+  to { opacity: 1; translate: 0 0; filter: blur(0); }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slide-out {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes drift-out {
+  to { transform: translateX(-30%); filter: brightness(0.65); }
+}
+
+@keyframes drift-in {
+  from { transform: translateX(-30%); filter: brightness(0.65); }
+  to { transform: translateX(0); filter: brightness(1); }
+}
+
+@keyframes parallax-in {
+  from { translate: 90px 0; opacity: 0.3; }
+  to { translate: 0 0; opacity: 1; }
+}
+
+@keyframes parallax-out {
+  to { translate: 90px 0; opacity: 0.3; }
+}
+
+@keyframes dip-out {
+  0% { opacity: 1; }
+  45%, 100% { opacity: 0; }
+}
+
+@keyframes dip-in {
+  0%, 50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes reveal {
+  from { clip-path: circle(0px at var(--reveal-x) var(--reveal-y)); }
+  to { clip-path: circle(var(--reveal-r) at var(--reveal-x) var(--reveal-y)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen--fade-in {
+    animation: none;
+  }
+}

@@ -1,0 +1,168 @@
+/*
+  Design tokens — copied from the Figma variables of "FlowTick — Productivity App".
+  Two levels, same as in Figma:
+    1. Primitives — raw values (a specific color, a specific size).
+    2. Interface  — what a value is used for (text color, divider, …); they point to primitives.
+  Screens should only use the Interface level.
+*/
+
+:root {
+  /* ---------- 1. Primitives (Shine / Primitives) ---------- */
+
+  /* Element gradients */
+  --gradient-water-start: #35abeb;
+  --gradient-water-end: #0e4385;
+  --gradient-air-start: #947ce3;
+  --gradient-air-end: #4d38cc;
+  --gradient-metal-start: #b9b9d7;
+  --gradient-metal-end: #434365;
+  --gradient-earth-start: #56c079;
+  --gradient-earth-end: #134d28;
+  --gradient-fire-start: #ee762a;
+  --gradient-fire-end: #6c2206;
+  --gradient-brown-start: rgba(76, 40, 24, 0.9);
+  --gradient-brown-end: rgba(42, 23, 17, 0.9);
+  --gradient-blue-start: rgba(24, 24, 76, 0.9);
+  --gradient-blue-end: rgba(20, 12, 39, 0.9);
+
+  /* Neutrals */
+  --neutral-white-100: #ffffff;
+  --neutral-white-alpha-60: rgba(255, 255, 255, 0.6);
+  --neutral-white-alpha-20: rgba(255, 255, 255, 0.2);
+  --neutral-white-alpha-10: rgba(255, 255, 255, 0.1);
+  --neutral-black-100: #000000;
+  --neutral-black-alpha-45: rgba(0, 0, 0, 0.45);
+  --neutral-black-alpha-25: rgba(0, 0, 0, 0.25);
+  --neutral-screen-grey: #dfdede;
+  --neutral-card-blue: rgba(13, 21, 56, 0.5);
+  --neutral-gray: rgba(185, 185, 215, 0.15);
+  --neutral-green: rgba(86, 192, 121, 0.15);
+  --neutral-yellow: rgba(255, 185, 60, 0.15);
+  --neutral-red: rgba(255, 0, 0, 0.15);
+  --neutral-blue: rgba(53, 171, 235, 0.15);
+  --neutral-violet: rgba(148, 124, 227, 0.15);
+
+  /* Themes */
+  --theme-onyx-black: rgba(5, 6, 17, 0.3);
+  --theme-azure-blue: #221f37;
+  --theme-azure-blue-alpha-20: rgba(34, 31, 55, 0.2);
+  --theme-cream-beige: #ffdeb5;
+  --theme-cream-beige-alpha-20: rgba(255, 222, 181, 0.2);
+
+  /* Utility & accent */
+  --utility-yellow-full: #ffb93c;
+  --utility-red-light: #ff0000;
+  --accent-core-glow: rgba(104, 133, 54, 0.4);
+
+  /* ---------- 2. Interface (Shine / Interface) ---------- */
+
+  /* Text */
+  --text-white-100: var(--neutral-white-100);
+  --text-white-60: var(--neutral-white-alpha-60);
+  --text-white-20: var(--neutral-white-alpha-20);
+  --text-black-100: var(--neutral-black-100);
+  --text-water: var(--gradient-water-start);
+  --text-air: var(--gradient-air-start);
+  --text-metal: var(--gradient-metal-start);
+  --text-earth: var(--gradient-earth-start);
+  --text-fire: var(--gradient-fire-start);
+  --text-yellow: var(--utility-yellow-full);
+  --text-red: var(--utility-red-light);
+
+  /* Shapes, frames, fills and icons */
+  --fill-base-grey: var(--neutral-screen-grey);
+  --fill-dark-onyx: var(--theme-onyx-black);
+  --fill-water: var(--gradient-water-start);
+  --fill-water-alpha-15: var(--neutral-blue);
+  --fill-air: var(--gradient-air-start);
+  --fill-air-alpha-15: var(--neutral-violet);
+  --fill-earth: var(--gradient-earth-start);
+  --fill-earth-alpha-15: var(--neutral-green);
+  --fill-yellow: var(--utility-yellow-full);
+  --fill-yellow-alpha-15: var(--neutral-yellow);
+  --fill-red: var(--utility-red-light);
+  --fill-red-alpha-15: var(--neutral-red);
+  --fill-accent-green: var(--accent-core-glow);
+  --fill-icon-active: var(--neutral-white-100);
+  --fill-inactive: var(--neutral-white-alpha-20);
+  --fill-dark-alpha-50: var(--neutral-card-blue);
+  --fill-black-alpha-25: var(--theme-onyx-black);
+  --fill-theme-dark: var(--theme-azure-blue);
+  --fill-theme-dark-alpha-20: var(--theme-azure-blue-alpha-20);
+  --fill-theme-light: var(--theme-cream-beige);
+  --fill-theme-light-alpha-20: var(--theme-cream-beige-alpha-20);
+
+  /* Strokes */
+  --stroke-border-active: var(--neutral-white-100);
+  --stroke-low: var(--neutral-white-alpha-60);
+  --stroke-divider: var(--neutral-white-alpha-20);
+  --stroke-water: var(--gradient-water-start);
+  --stroke-air: var(--gradient-air-start);
+  --stroke-earth: var(--gradient-earth-start);
+  --stroke-metal: var(--gradient-metal-start);
+  --stroke-fire: var(--gradient-fire-start);
+  --stroke-yellow: var(--utility-yellow-full);
+  --stroke-red: var(--utility-red-light);
+
+  /* Effects */
+  --effect-black-alpha-25: var(--neutral-black-alpha-25);
+  --effect-black-alpha-45: var(--neutral-black-alpha-45);
+  --effect-white-alpha-20: var(--neutral-white-alpha-20);
+
+  /* System bars */
+  --system-bars-white: var(--neutral-white-100);
+
+  /* ---------- Theme (set by js/theme.js from Settings → Theme) ---------- */
+
+  --accent: var(--fill-accent-green); /* tab bar, active tabs, today */
+  --app-bg: none;                      /* the screen background picture */
+
+  /* ---------- Dimensions ---------- */
+
+  --radius-full: 200px;
+  --radius-device: 65px;
+  --radius-large: 50px;
+  --radius-medium: 10px;
+  --radius-small: 5px;
+
+  --spacing-status-padding-horizontal: 40px;
+  --spacing-status-padding-vertical: 25px;
+  --spacing-header-top-margin: 20px;
+  --gap-hero: 50px;
+  --gap-screen-edge: 30px;
+  --gap-medium: 15px;
+  --gap-base: 10px;
+  --gap-small: 5px;
+  --gap-micro: 2px;
+
+  /* ---------- Typography (text styles App/…) ---------- */
+
+  /* Text size from Settings → Font (0.9 small … 1.15 large) */
+  --text-scale: 1;
+  --font-display: "Allison", cursive;
+  --font-text: "Caudex", Georgia, serif;
+
+  --type-display-hero: 400 80px / normal var(--font-display);
+  --type-display-large: 400 60px / normal var(--font-display);
+  --type-display-medium: 400 43px / normal var(--font-display);
+  --type-display-small: 400 25px / normal var(--font-display);
+  --type-text-xxl: 400 calc(20px * var(--text-scale)) / normal var(--font-text);
+  --type-text-xl: 400 calc(18px * var(--text-scale)) / normal var(--font-text);
+  --type-text-l: 400 calc(16px * var(--text-scale)) / normal var(--font-text);
+  --type-text-m: 400 calc(14px * var(--text-scale)) / normal var(--font-text);
+  --type-text-s: 400 calc(11px * var(--text-scale)) / normal var(--font-text);
+  --type-text-xs: 400 calc(9px * var(--text-scale)) / normal var(--font-text);
+  --type-text-xxs: 400 calc(7px * var(--text-scale)) / normal var(--font-text);
+
+  /* ---------- Effects (effect styles) ---------- */
+
+  --shadow-universal-art: 0 4px 4px 0 var(--effect-black-alpha-25);
+  --shadow-dark-art: 0 4px 4px 0 var(--effect-black-alpha-45);
+  --glow-white-neon: 0 0 5px 0 var(--effect-white-alpha-20);
+  --glass-alpha-25-blur: 4px;
+
+  /* ---------- Device (iPhone 16 Pro frame from the design) ---------- */
+
+  --device-width: 402px;
+  --device-height: 874px;
+}

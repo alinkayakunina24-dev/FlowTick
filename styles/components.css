@@ -1,0 +1,136 @@
+/* Pieces shared by several screens (components from the Figma UI kit) */
+
+/* ---------- Backgrounds ---------- */
+
+/* "Background / Onboarding / Desert Gradient" */
+.bg-desert-gradient {
+  background: var(--neutral-black-100) url("../assets/images/desert-gradient.png") center / cover no-repeat;
+}
+
+/* Mandala_Background_Component: a huge, barely visible mandala cut by the right edge */
+.mandala-deco {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 351px;
+  height: 702px;
+  transform: translateY(-50%);
+  overflow: hidden;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.mandala-deco::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 702px;
+  height: 702px;
+  background: url("../assets/images/mandala-grid.png") center / contain no-repeat;
+  /* The huge background sun turns very slowly */
+  animation: deco-turn 240s linear infinite;
+  animation-delay: var(--spin-delay, 0s);
+}
+
+@keyframes deco-turn {
+  to { rotate: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mandala-deco::before {
+    animation: none;
+  }
+}
+
+/* ---------- Layout ---------- */
+
+/* Content frame used by the onboarding screens: below the status bar,
+   above the home indicator, 30px from the sides */
+.onb-frame {
+  position: absolute;
+  top: 70px;
+  bottom: 48px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--gap-screen-edge) var(--gap-screen-edge) 0;
+}
+
+/* Bottom block: optional text, then the buttons */
+.cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-base);
+  margin-top: auto;
+}
+
+.cta__title {
+  margin: 0;
+  font: var(--type-display-medium);
+  color: var(--text-white-100);
+}
+
+.cta__text {
+  margin: 0;
+  font: var(--type-text-l);
+  color: var(--text-white-100);
+}
+
+/* ---------- Buttons (Button_Group_CTA) ---------- */
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--radius-medium);
+  width: 100%;
+}
+
+/* Primary_Action_Button — fill style "Color / Interaction / Button / Primary" */
+.btn-primary {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gap-medium);
+  border: 1px solid var(--stroke-border-active);
+  border-radius: 0;
+  background: linear-gradient(to right, var(--gradient-brown-start), var(--gradient-brown-end) 77.885%);
+  color: var(--text-white-100);
+  font: var(--type-text-xl);
+  cursor: pointer;
+  transition: opacity 200ms, filter 200ms;
+}
+
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.15);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Secondary_Action_Link */
+.btn-link {
+  height: 18px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-white-60);
+  font: var(--type-text-m);
+  cursor: pointer;
+}
+
+.btn-link:hover {
+  color: var(--text-white-100);
+}
+
+.btn-primary:focus-visible,
+.btn-link:focus-visible {
+  outline: 2px solid var(--stroke-border-active);
+  outline-offset: 3px;
+}

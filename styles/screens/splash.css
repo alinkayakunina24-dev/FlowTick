@@ -1,0 +1,138 @@
+/* ONB_01 Splash Screen — Figma node 2937:5160 */
+
+.splash {
+  background: var(--neutral-black-100) url("../../assets/images/splash-desert.png") center / cover no-repeat;
+}
+
+/* Logo_Center_Container: 260×260 circle, 57px above the vertical center.
+   No fill or stroke — the glass is drawn by LiquidGlass (js/effects/liquid-glass.js)
+   with the "Glass / Alpha 25" settings from Figma, see js/screens/splash.js. */
+.splash__logo {
+  position: absolute;
+  /* Centered without transform, so it grows from its own middle when it morphs */
+  left: calc(50% - 130px);
+  top: calc(50% - 57px - 130px);
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+/* Content_Block */
+.splash__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-medium);
+  height: 78px;
+  color: var(--text-white-100);
+  text-align: center;
+}
+
+.splash__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 51px;
+  margin: 0;
+  font: var(--type-display-hero);
+  white-space: nowrap;
+}
+
+.splash__tagline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 11px;
+  margin: 0;
+  font: var(--type-text-l);
+  white-space: pre;
+}
+
+/* The circle is alive: it swells a little with each breath, and the glass slowly
+   turns (see .liquid-glass--turn), so the sand seen through it drifts round */
+.splash__logo {
+  animation: splash-breathe 6s ease-in-out infinite;
+}
+
+@keyframes splash-breathe {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.03; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash__logo {
+    animation: none;
+  }
+}
+
+/* ---------- Growing into the mandala ---------- */
+
+.splash__logo.is-growing {
+  animation: none;
+}
+
+.splash__logo.is-growing .splash__content {
+  animation: splash-melt 900ms var(--ease-soft) both;
+}
+
+@keyframes splash-melt {
+  to { opacity: 0; filter: blur(6px); }
+}
+
+/* The mandala inside the circle, laid out at 330px and fitted to the 260px circle */
+.splash__art {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 330px;
+  height: 330px;
+  transform: scale(calc(260 / 330));
+  transform-origin: 0 0;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  animation: splash-art-in 1300ms var(--ease-soft) 650ms both;
+}
+
+.splash__art .mandala__art {
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes splash-art-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.splash__slogan {
+  pointer-events: none;
+  animation: splash-art-in 1100ms var(--ease-soft) 900ms both;
+}
+
+/* Leaving the mandala: the grown circle keeps its size and simply fades and softens
+   (the usual leave adds a tiny zoom, which would pull its size back) */
+.splash.screen--leave-fade > :not([data-transition="static"]) {
+  animation-name: splash-fade-away;
+}
+
+@keyframes splash-fade-away {
+  to { opacity: 0; filter: blur(4px); }
+}
+
+/* The finished mandala state: no entrance animations left to replay */
+.splash.is-mandala .splash__content {
+  display: none;
+}
+
+.splash.is-mandala .splash__art,
+.splash.is-mandala .splash__slogan {
+  animation: none;
+  opacity: 1;
+}
+
+.splash.is-mandala.screen--leave-fade > :not([data-transition="static"]) {
+  animation: splash-fade-away var(--t-duration) var(--ease-soft) both;
+}

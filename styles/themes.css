@@ -1,0 +1,658 @@
+/* Theme palettes — values set by js/theme.js from the Figma "Theme Variants":
+   --card, --advisory, --session-button, --session-ink, --title-ink, --sub-ink, --accent.
+   Text on cards stays white, as in the design. */
+
+/* Cards and tabs take the theme's tinted colour */
+:root {
+  --card: rgba(13, 21, 56, 0.5);
+  /* Fields, dropdowns, switches and FAQ cards: the theme's card colour over a deep base */
+  --field-bg: linear-gradient(var(--card), var(--card)), linear-gradient(rgba(5, 6, 17, 0.4), rgba(5, 6, 17, 0.4));
+  --fill-dark-alpha-50: var(--card);
+  --neutral-card-blue: var(--card);
+}
+
+.advisory {
+  border-color: var(--advisory-line, var(--stroke-low)) !important;
+  background: var(--advisory, linear-gradient(150deg, rgba(156, 123, 251, 0.4) 41.827%, rgba(60, 38, 153, 0.4) 100%)) !important;
+}
+
+/* "Start …" badge in the advisory: Figma's water gradient in every theme */
+.advisory__go {
+  border-color: var(--badge-line) !important;
+  background: var(--badge) !important;
+}
+
+/* Cards and icon squares: the theme's border */
+.card,
+.icon-square {
+  border-color: var(--line);
+}
+
+.btn-session,
+.journal-save {
+  border-color: var(--button-line, #fff) !important;
+  background: var(--session-button) !important;
+  color: var(--session-ink, #fff) !important;
+}
+
+/* Light Air & Light Metal: titles and labels on the picture are black (as in Figma) */
+:root[data-ink="dark"]:not([data-onboarding]) .app-header__title,
+:root[data-ink="dark"]:not([data-onboarding]) .focus-head__title,
+:root[data-ink="dark"]:not([data-onboarding]) .journal-prompt,
+:root[data-ink="dark"]:not([data-onboarding]) .cta__title,
+:root[data-ink="dark"]:not([data-onboarding]) .app-header__subtitle,
+:root[data-ink="dark"]:not([data-onboarding]) .app-header__date,
+:root[data-ink="dark"]:not([data-onboarding]) .section-label,
+:root[data-ink="dark"]:not([data-onboarding]) .app__content > .app-section > .hint,
+:root[data-ink="dark"]:not([data-onboarding]) .app-section > .hint,
+:root[data-ink="dark"]:not([data-onboarding]) .week-day,
+:root[data-ink="dark"]:not([data-onboarding]) .timer-ring__hint,
+:root[data-ink="dark"]:not([data-onboarding]) .silence-note,
+:root[data-ink="dark"]:not([data-onboarding]) .silence-title,
+:root[data-ink="dark"]:not([data-onboarding]) .breath-text,
+:root[data-ink="dark"]:not([data-onboarding]) .breath-cycles,
+:root[data-ink="dark"]:not([data-onboarding]) .breath-pattern > span:last-child,
+:root[data-ink="dark"]:not([data-onboarding]) .sound-row__label,
+:root[data-ink="dark"]:not([data-onboarding]) .status-bar__time {
+  color: var(--title-ink) !important;
+}
+
+:root[data-ink="dark"]:not([data-onboarding]) .app-header__subtitle,
+:root[data-ink="dark"]:not([data-onboarding]) .app-header__date,
+:root[data-ink="dark"]:not([data-onboarding]) .app-section > .hint,
+:root[data-ink="dark"]:not([data-onboarding]) .week-day:not([aria-pressed="true"]) {
+  color: var(--sub-ink) !important;
+}
+
+:root[data-ink="dark"]:not([data-onboarding]) .week-day[aria-pressed="true"] {
+  color: #fff !important;
+}
+
+:root[data-ink="dark"]:not([data-onboarding]) .status-bar__signal {
+  filter: brightness(0);
+}
+
+:root[data-ink="dark"]:not([data-onboarding]) .divider {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- Tab bar icons on a light tab bar (Light Water) ---------- */
+
+:root[data-tab-ink="dark"] .tab-bar__item {
+  color: rgba(0, 0, 0, 0.35) !important;
+}
+
+:root[data-tab-ink="dark"] .tab-bar__item[aria-current="page"],
+:root[data-tab-ink="dark"] .tab-bar__item:hover {
+  color: #000 !important;
+}
+
+:root[data-tab-ink="dark"] .tab-bar__item[aria-current="page"] {
+  border-color: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+:root[data-tab-ink="dark"] .week-day[aria-pressed="true"],
+:root[data-tab-ink="dark"] .period-tabs__item[aria-pressed="true"] {
+  color: #000 !important;
+}
+
+/* ---------- Light Air & Light Metal: all text, lines and icons on the page are black ---------- */
+
+:root[data-ink="dark"]:not([data-onboarding]) :is(.app, .focus-screen, .sub-screen) {
+  --text-white-100: #000;
+  --text-white-60: rgba(0, 0, 0, 0.6);
+  --text-white-20: rgba(0, 0, 0, 0.2);
+  --stroke-border-active: #000;
+  --stroke-low: var(--line);
+  --stroke-divider: rgba(0, 0, 0, 0.2);
+  --fill-inactive: rgba(0, 0, 0, 0.2);
+  --fill-icon-active: #000;
+  --system-bars-white: #000;
+  color: #000;
+}
+
+/* …except on the dark accent and glass panels, where text stays white */
+:root[data-ink="dark"]:not([data-onboarding]) :is(.tab-bar, .glass-panel, .modal, .drawer, .notice,  .focus-mode__card, .scene, .focus-screen--player,
+  .period-tabs__item[aria-pressed="true"], .week-day[aria-pressed="true"]) {
+  --text-white-100: #fff;
+  --text-white-60: rgba(255, 255, 255, 0.6);
+  --text-white-20: rgba(255, 255, 255, 0.2);
+  --stroke-border-active: #fff;
+  --stroke-low: rgba(255, 255, 255, 0.6);
+  --stroke-divider: rgba(255, 255, 255, 0.2);
+  --fill-inactive: rgba(255, 255, 255, 0.2);
+  --fill-icon-active: #fff;
+  color: #fff;
+}
+
+:root[data-ink="dark"]:not([data-onboarding]) .advisory,
+:root[data-ink="dark"]:not([data-onboarding]) .advisory__go,
+:root[data-ink="dark"]:not([data-onboarding]) .timer-ring__time,
+:root[data-ink="dark"]:not([data-onboarding]) .timer-ring__quote,
+:root[data-ink="dark"]:not([data-onboarding]) .app-header__avatar {
+  color: #000 !important;
+  border-color: #000;
+}
+
+:root[data-ink="dark"]:not([data-onboarding]) .app-header__avatar {
+  border-color: #000 !important;
+}
+
+:root[data-ink="dark"]:not([data-onboarding]) .home-indicator__bar {
+  background: #000;
+}
+
+/* ---------- Dark Water: a calmer red (same hue, less glare) ---------- */
+
+:root[data-theme="dark-water"] {
+  --utility-red-light: #c4473f;
+  --neutral-red: rgba(196, 71, 63, 0.15);
+}
+
+/* ---------- Dark Water: element colours at full strength, as on the Home rings ---------- */
+
+:root[data-theme="dark-water"] :is(.stat-row__fill, .progress__fill) {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--el) 55%, transparent), var(--el));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--el) 45%, transparent);
+}
+
+:root[data-theme="dark-water"] :is(.stat-row__dot, .progress__dot) {
+  background: var(--el);
+  box-shadow:
+    0 0 6px 3px color-mix(in srgb, var(--el) 70%, transparent),
+    0 0 18px 7px color-mix(in srgb, var(--el) 35%, transparent);
+}
+
+:root[data-theme="dark-water"] .tag--earth {
+  background: color-mix(in srgb, var(--gradient-earth-start) 22%, transparent);
+}
+
+/* Dark Water: the Elemental Sync pill takes the same light border as the cards */
+:root[data-theme="dark-water"] .sync-pill {
+  border-color: var(--line);
+}
+
+/* Dark Water: chosen chips (15/25/50 min, sound…) in the accent colour, like the tab bar button */
+:root[data-theme="dark-water"] .chip[aria-pressed="true"]:not([class*="el-"]) {
+  border-color: var(--stroke-low);
+  background: var(--accent);
+}
+
+/* Dark Water: the calendar is frosted glass in the accent blue, 50% opaque */
+:root[data-theme="dark-water"] .calendar__panel {
+  background: rgba(62, 89, 136, 0.5) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  backdrop-filter: blur(24px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* …and today's circle a step lighter, so it still stands out */
+:root[data-theme="dark-water"] .cal-day.is-today {
+  background: rgba(120, 150, 205, 0.55);
+}
+
+/* Dark Water: the smart insight card without its glow */
+:root[data-theme="dark-water"] .insight {
+  box-shadow: none;
+}
+
+/* ---------- Dark Air ---------- */
+
+/* The Elemental Sync pill has a white rim */
+:root[data-theme="dark-air"] .sync-pill {
+  border-color: #fff;
+}
+
+/* Today's Focus: the glowing dot at the end of the bar is violet */
+:root[data-theme="dark-air"] .focus-card .progress__dot {
+  --el: var(--gradient-air-start);
+  background: var(--gradient-air-start);
+  box-shadow:
+    0 0 6px 3px rgba(148, 124, 227, 0.7),
+    0 0 16px 6px rgba(148, 124, 227, 0.35);
+}
+
+/* Dashboard: Overdue / Today / Upcoming labels in white (their rims keep their colours) */
+:root[data-theme="dark-air"] .status-pill--overdue { color: #fff; border-color: var(--utility-red-light); }
+:root[data-theme="dark-air"] .status-pill--today { color: #fff; border-color: var(--gradient-earth-start); }
+:root[data-theme="dark-air"] .status-pill--upcoming { color: #fff; border-color: var(--gradient-air-start); }
+
+/* Calendar: frosted glass in the theme's autumn brown */
+:root[data-theme="dark-air"] .calendar__panel {
+  background: rgba(118, 62, 32, 0.85) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  backdrop-filter: blur(24px) saturate(1.3);
+}
+
+:root[data-theme="dark-air"] .cal-day.is-today {
+  background: rgba(148, 58, 31, 0.85);
+}
+
+/* Home: a denser red Balance Alert */
+:root[data-theme="dark-air"] .alert--red {
+  background: rgba(150, 20, 20, 0.55);
+}
+
+/* Journal: the smart insight card without its yellow glow */
+:root[data-theme="dark-air"] .insight {
+  box-shadow: none !important;
+}
+
+/* Pomodoro ring: deep violet flowing into deep green, with a soft dark glow */
+:root[data-theme="dark-air"] .timer-ring__progress {
+  filter: drop-shadow(0 0 6px rgba(30, 20, 60, 0.45));
+}
+
+/* Journal: the "Write a few words…" hint is white at 50% */
+:root[data-theme="dark-air"] .gratitude::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+/* ---------- Windows and the side menu follow the theme (all themes) ----------
+   The theme's accent laid over a deep base, frosted */
+.modal__panel,
+.drawer__panel {
+  background:
+    linear-gradient(var(--accent), var(--accent)),
+    rgba(12, 12, 16, 0.86) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  backdrop-filter: blur(22px) saturate(1.3);
+}
+
+/* Dark Air: the smart insight card is blue (Water's colour) instead of yellow,
+   which looked like a glow on the orange background */
+:root[data-theme="dark-air"] .insight {
+  --tone: var(--gradient-water-start);
+}
+
+/* Dark Metal: the Elemental Sync pill has a white rim */
+:root[data-theme="dark-metal"] .sync-pill {
+  border-color: #fff;
+}
+
+/* Dark Earth: the calendar in the colour of the main cards (deep navy), frosted */
+:root[data-theme="dark-earth"] .calendar__panel {
+  background: rgba(13, 21, 56, 0.8) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  backdrop-filter: blur(24px) saturate(1.3);
+}
+
+/* Dark Earth: the side menu in the colour of the main cards (deep navy), not the green accent */
+:root[data-theme="dark-earth"] .drawer__panel {
+  background: rgba(13, 21, 56, 0.8) !important;
+}
+
+/* Dark Water: the side menu in the deep colour of the theme's background */
+:root[data-theme="dark-water"] .drawer__panel {
+  background: rgba(13, 19, 33, 0.94) !important;
+}
+
+/* Dark Air: the radar's coloured wedges are denser, so they don't wash into the orange */
+:root[data-theme="dark-air"] .radar__shape {
+  --radar-wedge: 0.78;
+}
+
+/* Silence Mode circle: the same deep violet → deep green as the Pomodoro ring */
+:root[data-theme="dark-air"] .silence-orb__pie {
+  background: conic-gradient(from 0deg, rgba(62, 32, 128, 0.95), rgba(52, 72, 112, 0.95) calc((360deg - var(--done)) * 0.55), rgba(24, 112, 66, 0.95) calc(360deg - var(--done)), transparent 0);
+  filter: drop-shadow(0 0 30px rgba(30, 20, 60, 0.35)) blur(1px);
+  opacity: 0.7;
+}
+
+/* Breath Work orb: a few tones lighter */
+:root[data-theme="dark-air"] .breath-orb__glow {
+  filter: saturate(0.85) brightness(1.25);
+  opacity: 0.95;
+}
+
+/* Dark Air: the element colours are as dense as on the radar, everywhere
+   (task and habit cards, chips, badges, mood circles…) */
+:root[data-theme="dark-air"] [class*="el-"] {
+  --el-gradient: linear-gradient(
+    var(--el-angle, 135deg),
+    color-mix(in srgb, var(--el) 72%, transparent) 41.827%,
+    color-mix(in srgb, var(--el-end) 72%, transparent) 100%
+  );
+  --el-soft: color-mix(in srgb, var(--el) 35%, transparent);
+}
+
+/* …and the progress bars and their planets glow in full colour */
+:root[data-theme="dark-air"] :is(.stat-row__fill, .progress__fill) {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--el) 60%, transparent), var(--el));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--el) 45%, transparent);
+}
+
+:root[data-theme="dark-air"] :is(.stat-row__dot, .progress__dot):not(.focus-card .progress__dot) {
+  background: var(--el);
+  box-shadow:
+    0 0 6px 3px color-mix(in srgb, var(--el) 70%, transparent),
+    0 0 18px 7px color-mix(in srgb, var(--el) 35%, transparent);
+}
+
+/* Dark Fire: the Elemental Sync pill has a white rim */
+:root[data-theme="dark-fire"] .sync-pill {
+  border-color: #fff;
+}
+
+/* Dark Fire: the side menu in the deep colour of the theme's background */
+:root[data-theme="dark-fire"] .drawer__panel {
+  background: rgba(29, 12, 10, 0.94) !important;
+}
+
+/* ---------- Light Water: clear sea-blue glass, deep sea-blue accent, one warm coral button ---------- */
+
+/* Calendar, side menu and windows: deep sea blue (the accent's tone), frosted */
+:root[data-theme="light-water"] .calendar__panel,
+:root[data-theme="light-water"] .modal__panel {
+  background: rgba(16, 70, 96, 0.88) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  backdrop-filter: blur(24px) saturate(1.3);
+}
+
+:root[data-theme="light-water"] .drawer__panel {
+  /* The same grey-blue as the tab bar */
+  background: var(--accent) !important;
+}
+
+:root[data-theme="light-water"] .cal-day.is-today {
+  background: rgba(96, 190, 220, 0.55);
+}
+
+/* Chosen chips (15/25/50 min, sound…) in the accent blue */
+:root[data-theme="light-water"] .chip[aria-pressed="true"]:not([class*="el-"]) {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: var(--accent);
+}
+
+/* Journal: "Save entry" in the accent blue, and dark, readable writing on the light field */
+:root[data-theme="light-water"] .journal-save {
+  border-color: rgba(255, 255, 255, 0.7) !important;
+  background: var(--accent) !important;
+  color: #fff !important;
+}
+
+:root[data-theme="light-water"] .gratitude {
+  color: #0b2733;
+}
+
+:root[data-theme="light-water"] .gratitude::placeholder {
+  color: rgba(11, 39, 51, 0.55);
+  opacity: 1;
+}
+
+/* Focus Mode cards: the light theme's element photos, softly blurred behind the text */
+.focus-mode__card--photo {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.focus-mode__card--photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(6, 30, 40, 0.55), rgba(6, 30, 40, 0.15) 80%);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+/* Light Water: the cards and alerts are frosted glass with a very fine grain, so the
+   picture behind them is softened and the text in front stands out */
+:root[data-theme="light-water"] :is(.card, .alert, .period-tabs, .habit-card, .insight, .icon-square) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  -webkit-backdrop-filter: blur(26px) saturate(1.1) brightness(0.92);
+  backdrop-filter: blur(26px) saturate(1.1) brightness(0.92);
+}
+
+/* ---------- Light Air: Baker's Dream (#C89674) cards on Mocha Delight (#91664A) ---------- */
+
+/* The bars and panels that hold everything are the deeper Mocha Delight */
+:root[data-theme="light-air"] .period-tabs {
+  background: rgba(138, 106, 81, 0.96);
+}
+
+/* The periods not chosen: soft white on the mocha bar */
+:root[data-theme="light-air"] .period-tabs__item:not([aria-pressed="true"]) {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+:root[data-theme="light-air"] .calendar__panel,
+:root[data-theme="light-air"] .modal__panel {
+  background: rgba(145, 102, 74, 0.94) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  backdrop-filter: blur(24px) saturate(1.2);
+}
+
+/* Light Air: the element percentages are their colour mixed far towards black, so they
+   read clearly but keep a hint of each element; the status tags are black with black rims */
+:root[data-theme="light-air"] .stat-row__value {
+  color: color-mix(in srgb, var(--el) 30%, #000) !important;
+}
+
+/* Status tags as in Figma: a soft fill of their colour, a deep rim and text of the same deep tone */
+:root[data-theme="light-air"] .tag--red { background: rgba(255, 0, 0, 0.3) !important; border-color: #3e0c0c !important; color: #3e0c0c !important; }
+:root[data-theme="light-air"] .tag--yellow { background: rgba(255, 192, 79, 0.3) !important; border-color: #382315 !important; color: #382315 !important; }
+:root[data-theme="light-air"] .tag--earth { background: rgba(61, 120, 80, 0.3) !important; border-color: #144625 !important; color: #144625 !important; }
+
+/* The side menu in the tab bar's dark coffee */
+:root[data-theme="light-air"] .drawer__panel {
+  background: var(--accent) !important;
+}
+
+/* Text on coloured (element) cards is black; their element-coloured rims stay */
+:root[data-theme="light-air"] :is(.task, .habit-card, .gratitude, .chip, .breath-pattern__card, .scene-tag)[class*="el-"],
+:root[data-theme="light-air"] :is(.task, .habit-card)[class*="el-"] * {
+  color: #000 !important;
+}
+
+/* Journal smart insight: a hot golden yellow plate in a frame, black text */
+:root[data-theme="light-air"] .insight {
+  --tone: #b7801f;
+  border-color: #8a5a10;
+  background: rgba(244, 190, 84, 0.72);
+  color: #000;
+}
+
+:root[data-theme="light-air"] .insight :is(b, .insight__text, .insight__close) {
+  color: #000 !important;
+}
+
+/* Dashboard group labels (Overdue / Today / Upcoming / Done) in black on light air */
+:root[data-theme="light-air"] .status-pill {
+  color: #000 !important;
+}
+
+/* Light Air: timer rings in the theme's own violet and green */
+:root[data-theme="light-air"] :is(.timer-ring__progress, .player-ring__progress) {
+  filter: drop-shadow(0 0 5px rgba(113, 80, 58, 0.35));
+}
+
+:root[data-theme="light-air"] .silence-orb__pie {
+  background: conic-gradient(from 0deg, rgba(104, 82, 177, 0.9), rgba(61, 120, 80, 0.9) calc(360deg - var(--done)), transparent 0);
+  filter: drop-shadow(0 0 24px rgba(113, 80, 58, 0.3)) blur(1px);
+  opacity: 0.6;
+}
+
+/* Breath orb in the muted water and air of the theme */
+:root[data-theme="light-air"] .breath-orb__glow {
+  /* White centre melting into violet; the blue only as a thin rim at the very edge */
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(214, 204, 240, 0.8) 22%, rgba(104, 82, 177, 0.7) 60%, rgba(84, 62, 160, 0.8) 88%, rgba(53, 98, 122, 0.85) 97%, rgba(53, 98, 122, 0.3) 100%);
+  box-shadow: 0 0 26px rgba(104, 82, 177, 0.3);
+  filter: none;
+}
+
+/* ---------- Light Air (Figma "Light Air · now"): earthy, muted elements ----------
+   Each element: a muted colour, a deep rim of the same hue */
+:root[data-theme="light-air"] {
+  --gradient-water-start: #35627a;
+  --gradient-water-end: #0e3f5a;
+  --gradient-air-start: #6852b1;
+  --gradient-air-end: #2a1769;
+  --gradient-metal-start: #9494ac;
+  --gradient-metal-end: #191966;
+  --gradient-earth-start: #3d7850;
+  --gradient-earth-end: #144625;
+  --gradient-fire-start: #af4c0e;
+  --gradient-fire-end: #4a2209;
+}
+
+/* Element cards: a 30% wash of the colour, a deep rim, black writing */
+:root[data-theme="light-air"] [class*="el-"] {
+  --el-gradient: linear-gradient(var(--el-angle, 135deg), color-mix(in srgb, var(--el) 34%, transparent) 30%, color-mix(in srgb, var(--el-end) 30%, transparent) 100%);
+}
+
+:root[data-theme="light-air"] :is(.task, .habit-card, .habit-tile, .pill-card, .pill-button, .el-badge)[class*="el-"] {
+  border-color: var(--el-end) !important;
+}
+
+:root[data-theme="light-air"] :is(.pill-card, .pill-button)[class*="el-"],
+:root[data-theme="light-air"] :is(.pill-card, .pill-button)[class*="el-"] * {
+  color: #000 !important;
+}
+
+/* Bars: solid colour on a soft brown track; matte planets with a faint halo */
+:root[data-theme="light-air"] :is(.stat-row__bar, .progress)::before {
+  background: rgba(118, 85, 62, 0.2);
+}
+
+:root[data-theme="light-air"] :is(.stat-row__fill, .progress__fill):not(.focus-card .progress__fill) {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--el) 55%, transparent), color-mix(in srgb, var(--el-end) 75%, transparent));
+  box-shadow: none;
+}
+
+:root[data-theme="light-air"] :is(.stat-row__dot, .progress__dot):not(.focus-card .progress__dot) {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--el) 85%, transparent) 40%, color-mix(in srgb, var(--el-end) 85%, transparent));
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--el) 30%, transparent);
+  animation: none;
+}
+
+/* Light Air (from Figma): red Balance Alert, sand Today's Focus card, coffee dividers */
+:root[data-theme="light-air"] .alert--red {
+  background: rgba(189, 13, 13, 0.3);
+  border-color: #3e0c0c;
+}
+
+:root[data-theme="light-air"] .focus-card {
+  border-color: #76553f;
+}
+
+:root[data-theme="light-air"] .focus-card .progress__fill {
+  background: linear-gradient(90deg, rgba(115, 92, 175, 0.75), rgba(179, 87, 28, 0.85) 92%);
+}
+
+:root[data-theme="light-air"] .divider {
+  background: #76553f;
+}
+
+
+
+/* Light Air: the advisory's "Start …" button and the Dashboard sync pill in the coffee accent */
+:root[data-theme="light-air"][data-ink] .advisory .advisory__go.advisory__go[class*="el-"],
+:root[data-theme="light-air"][data-ink] .sync-pill.sync-pill {
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  background: var(--accent) !important;
+  color: #fff !important;
+}
+
+/* Light Air: in each element row the number and its tag share the element's deep colour
+   (the same deep tone as that element's card rims) */
+:root[data-theme="light-air"] .stat-row .stat-row__value {
+  color: var(--el-end) !important;
+}
+
+:root[data-theme="light-air"] .stat-row .tag.tag {
+  color: var(--el-end) !important;
+  border-color: var(--el-end) !important;
+  background: color-mix(in srgb, var(--el) 22%, transparent) !important;
+}
+
+/* Light Air: every sand card is exactly one colour and one transparency — the theme card */
+:root[data-theme="light-air"] :is(.card, .focus-card, .advisory, .icon-square, .drawer__link, .drawer__stats > div, .faq, .settings-list) {
+  background-color: var(--card) !important;
+  background-image: none !important;
+}
+
+/* The scene player sits on a dark photo: its text, time and icons stay white */
+:root[data-ink="dark"]:not([data-onboarding]) .focus-screen--player :is(.focus-head__title, .player-ring__time, .player-quote, .player-credit, .status-bar__time) {
+  color: #fff !important;
+}
+
+/* ---------- Light Metal ---------- */
+
+/* Tags (+16%, 0%, Rest…): black writing and rim, their colour stays as a fill */
+:root[data-theme="light-metal"] .tag {
+  color: #000 !important;
+  border-color: #000 !important;
+}
+
+/* Bars: one solid element colour, no gradient */
+:root[data-theme="light-metal"] :is(.stat-row__fill, .progress__fill):not(.focus-card .progress__fill) {
+  background: var(--el);
+}
+
+/* The Elemental Sync pill looks like the "Focus the remaining…" button below it */
+:root[data-theme="light-metal"][data-ink] .sync-pill.sync-pill {
+  border-color: var(--gradient-air-start) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--gradient-air-start) 40%, transparent) 41.827%, color-mix(in srgb, var(--gradient-air-end) 40%, transparent) 100%) !important;
+  color: #000 !important;
+}
+
+/* A softer red (same hue) for Overdue and other red marks, so it doesn't jump off the grey */
+:root[data-theme="light-metal"] {
+  --utility-red-light: #b4544b;
+  --neutral-red: rgba(180, 84, 75, 0.2);
+}
+
+/* Light Metal: the smart insight is a light, see-through yellow plate, black text */
+:root[data-theme="light-metal"] .insight {
+  /* As see-through as the Joy mood tag: the same yellow at 15%, with a yellow rim */
+  --tone: var(--utility-yellow-full);
+  border-color: var(--utility-yellow-full);
+  background: color-mix(in srgb, var(--utility-yellow-full) 15%, transparent);
+  color: #000;
+}
+
+:root[data-theme="light-metal"] .insight :is(b, .insight__text, .insight__close) {
+  color: #000 !important;
+}
+
+/* ---------- Light Earth ---------- */
+
+/* Tags (+16%, 0%, −17%…): white numbers; rims and fills keep their colours */
+:root[data-theme="light-earth"] .tag {
+  color: #fff !important;
+}
+
+/* The Elemental Sync pill looks like the "Focus the remaining…" button below it */
+:root[data-theme="light-earth"][data-ink] .sync-pill.sync-pill {
+  border-color: var(--gradient-air-start) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--gradient-air-start) 40%, transparent) 41.827%, color-mix(in srgb, var(--gradient-air-end) 40%, transparent) 100%) !important;
+  color: #fff !important;
+}
+
+/* ---------- Light Fire ---------- */
+
+/* The Elemental Sync pill looks like the "Focus the remaining…" button below it */
+:root[data-theme="light-fire"][data-ink] .sync-pill.sync-pill {
+  border-color: var(--gradient-air-start) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--gradient-air-start) 40%, transparent) 41.827%, color-mix(in srgb, var(--gradient-air-end) 40%, transparent) 100%) !important;
+  color: #fff !important;
+}
+
+/* A softer red (same hue) for Overdue and other red marks */
+:root[data-theme="light-fire"] {
+  --utility-red-light: #b4544b;
+  --neutral-red: rgba(180, 84, 75, 0.2);
+}
+
+/* Dashboard labels (Overdue / Today / Upcoming) in white; their rims keep their colours */
+:root[data-theme="light-fire"] .status-pill:not(.status-pill--done) {
+  color: #fff !important;
+}

@@ -1,0 +1,22 @@
+<svg width="276" height="254" viewBox="0 0 276 254" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#s)">
+<path d="M128.609 1.25781C152.293 80.7518 189.918 127.544 270.73 122.758L128.609 157.261V1.25781Z" fill="url(#metal)" fill-opacity="0.4"/>
+<path d="M270.73 122.758C211.073 167.367 169.95 184.43 186.73 244.258L128.609 157.261L270.73 122.758Z" fill="url(#earth)" fill-opacity="0.4"/>
+<path d="M128.609 157.261L186.73 244.258C139.949 213.144 135.951 208.163 89.7305 214.758L128.609 157.261Z" fill="url(#fire)" fill-opacity="0.4"/>
+<path d="M5.23047 131.258L128.609 157.261V1.25781C105.526 71.9172 62.7305 123.258 5.23047 131.258Z" fill="url(#air)" fill-opacity="0.4"/>
+<path d="M128.609 157.261L5.23047 131.258C51.2305 154.758 85.8513 176.851 89.7305 214.758L128.609 157.261Z" fill="url(#water)" fill-opacity="0.4"/>
+<path d="M128.609 157.261L5.23047 131.258M128.609 157.261V1.25781M128.609 157.261L270.73 122.758M128.609 157.261L186.73 244.258M128.609 157.261L89.7305 214.758M270.73 122.758C189.918 127.544 152.293 80.7518 128.609 1.25781C105.526 71.9172 62.7305 123.258 5.23047 131.258C51.2305 154.758 85.8513 176.851 89.7305 214.758C135.951 208.163 139.949 213.144 186.73 244.258C169.95 184.43 211.073 167.367 270.73 122.758Z" stroke="white" stroke-opacity="0.6" stroke-width="0.75"/>
+</g>
+<defs>
+<filter id="s" x="0" y="0" width="276" height="254" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feGaussianBlur in="SourceAlpha" stdDeviation="2"/><feOffset dy="4"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend in="SourceGraphic"/>
+</filter>
+<linearGradient id="metal" x1="5.23" y1="1.26" x2="304.6" y2="54.8" gradientUnits="userSpaceOnUse"><stop offset="0.418" stop-color="#B9B9D7"/><stop offset="1" stop-color="#434365"/></linearGradient>
+<linearGradient id="earth" x1="5.23" y1="1.26" x2="304.6" y2="54.8" gradientUnits="userSpaceOnUse"><stop offset="0.418" stop-color="#56C079"/><stop offset="1" stop-color="#134D28"/></linearGradient>
+<linearGradient id="fire" x1="5.23" y1="1.26" x2="304.6" y2="54.8" gradientUnits="userSpaceOnUse"><stop offset="0.418" stop-color="#EE762A"/><stop offset="1" stop-color="#6C2206"/></linearGradient>
+<linearGradient id="air" x1="5.23" y1="1.26" x2="304.6" y2="54.8" gradientUnits="userSpaceOnUse"><stop offset="0.418" stop-color="#947CE3"/><stop offset="1" stop-color="#434365"/></linearGradient>
+<linearGradient id="water" x1="5.23" y1="1.26" x2="304.6" y2="54.8" gradientUnits="userSpaceOnUse"><stop offset="0.424" stop-color="#35ABEB"/><stop offset="1" stop-color="#0E4385"/></linearGradient>
+</defs>
+</svg>

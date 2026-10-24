@@ -1,0 +1,572 @@
+/* Onboarding screens ONB_03 – ONB_12 */
+
+/* ---------- ONB_03 Name Input ---------- */
+
+/* Name_Input_Component: 245px from the top of the screen */
+.name__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-medium);
+  margin-top: 145px;
+}
+
+.name__sun {
+  display: block;
+  filter: drop-shadow(var(--shadow-universal-art));
+  /* The sun keeps turning slowly, as on the mandala */
+  animation: sun-turn 90s linear infinite;
+  animation-delay: var(--spin-delay, 0s);
+}
+
+@keyframes sun-turn {
+  to { rotate: 360deg; }
+}
+
+.name__block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+  width: 100%;
+  /* More air below the sun than in Figma (15px), which felt too tight */
+  margin-top: var(--gap-screen-edge);
+}
+
+/* Input_Field_Container */
+.text-field {
+  width: 100%;
+  height: 54px;
+  padding: var(--gap-medium) var(--gap-screen-edge);
+  border: 1px solid var(--stroke-border-active);
+  border-radius: var(--radius-large);
+  background: var(--fill-inactive);
+  color: var(--text-white-100);
+  caret-color: var(--fill-icon-active);
+  font: var(--type-text-l);
+  outline: none;
+}
+
+.text-field::placeholder {
+  color: var(--text-white-60);
+}
+
+.text-field:focus-visible {
+  box-shadow: var(--glow-white-neon);
+}
+
+.name__hint {
+  margin: 0;
+  font: var(--type-text-l);
+  color: var(--text-white-60);
+}
+
+/* ---------- ONB_04 Welcome ---------- */
+
+/* Welcome_Name_Component: centered, 54.5px above the middle */
+.welcome__hero {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 54.5px);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-medium);
+}
+
+.welcome__sun {
+  display: block;
+  filter: drop-shadow(var(--shadow-universal-art));
+  animation: sun-turn 90s linear infinite;
+  animation-delay: var(--spin-delay, 0s);
+}
+
+.welcome__title {
+  margin: 0;
+  font: var(--type-display-large);
+  color: var(--text-white-100);
+  white-space: nowrap;
+}
+
+/* ---------- ONB_05–09 Elements ---------- */
+
+.element {
+  /* Orb first, then the title, the text and the buttons — slowly, one by one */
+  --enter-step: 380ms;
+  --enter-length: 1200ms;
+  touch-action: pan-y;
+  user-select: none;
+  background-color: var(--neutral-black-100);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.element__frame {
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Element_Orb_Component: 218px glass circle with the icon and name */
+.element__orb {
+  width: 218px;
+  height: 218px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+.element__icon {
+  display: block;
+  object-fit: cover;
+}
+
+.element__name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 218px;
+  height: 60px;
+  margin: 0;
+  font: var(--type-display-large);
+  color: var(--text-white-100);
+}
+
+/* Onboarding_Card_Component */
+.element-card {
+  position: relative;
+  width: 100%;
+  height: 283px;
+  flex-shrink: 0;
+}
+
+/* Onboarding_Card_Bg_Frame: soft dark plate, wider than the content */
+.element-card__bg {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 402px;
+  height: 278px;
+  transform: translateX(-50%);
+  border-radius: var(--radius-large);
+  background: var(--fill-dark-onyx);
+  filter: blur(8px);
+}
+
+.element-card__content {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 3px);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--radius-medium);
+  width: 342px;
+}
+
+.element-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--radius-medium);
+  width: 346px;
+  color: var(--text-white-100);
+}
+
+.element-card__title {
+  margin: 0;
+  font: var(--type-text-xxl);
+  text-align: center;
+}
+
+.element-card__body {
+  margin: 0;
+  font: var(--type-text-l);
+}
+
+/* ---------- ONB_10 Theme ---------- */
+
+.theme__frame {
+  gap: var(--gap-screen-edge);
+}
+
+/* Element_Orb_Display_Component: two pills that bleed to the screen edges */
+.theme__display {
+  position: relative;
+  height: 512px;
+  margin: 0 calc(-1 * var(--gap-screen-edge));
+  flex-shrink: 0;
+}
+
+/* 322px wide on a 402px screen; grows with wider screens so the orbs stay centered */
+.theme__pill {
+  position: absolute;
+  width: calc(50% + 121px);
+  height: 240px;
+  background: var(--fill-dark-onyx);
+}
+
+.theme__pill--dark {
+  top: 0;
+  right: 0;
+  border-radius: var(--radius-full) 0 0 var(--radius-full);
+}
+
+.theme__pill--light {
+  bottom: 1px;
+  left: 0;
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+}
+
+/* Element_Orb_Selector_Set */
+.theme-orb {
+  position: absolute;
+  top: 11px;
+  width: 218px;
+  height: 218px;
+  padding: var(--gap-medium);
+  border: 0;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-universal-art);
+  cursor: pointer;
+  /* Dim until hovered or chosen */
+  opacity: 0.45;
+  transition:
+    opacity 500ms var(--ease-soft),
+    transform 500ms var(--ease-soft),
+    box-shadow 500ms var(--ease-soft);
+}
+
+.theme-orb:hover {
+  opacity: 0.8;
+}
+
+.theme-orb--dark {
+  left: 11px;
+  background: var(--fill-theme-dark-alpha-20);
+}
+
+.theme-orb--light {
+  right: 11px;
+  background: var(--fill-theme-light-alpha-20);
+}
+
+.theme-orb[aria-checked="true"] {
+  opacity: 1;
+  transform: scale(1.06);
+  box-shadow: var(--shadow-universal-art), 0 0 0 2px var(--stroke-border-active), 0 0 24px var(--effect-white-alpha-20);
+}
+
+.theme-orb:focus-visible {
+  outline: 2px solid var(--stroke-border-active);
+  outline-offset: 4px;
+}
+
+.theme-orb__glow {
+  position: absolute;
+  top: 15px;
+  left: 11px;
+  display: block;
+}
+
+.theme-orb__mandala {
+  position: absolute;
+  top: calc(50% - 1.44px);
+  left: 7.8%;
+  transform: translateY(-50%);
+  display: block;
+  filter: drop-shadow(var(--shadow-universal-art));
+}
+
+/* ---------- ONB_11 Set Intentions ---------- */
+
+.intentions__frame {
+  gap: var(--gap-medium);
+}
+
+/* The chosen theme's picture fades in behind the cards (no brown base under it) */
+.intentions {
+  background: #000;
+}
+
+.intentions__bgs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.intentions__bg {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 1800ms var(--ease-soft);
+  pointer-events: none;
+}
+
+.intentions__bg.is-on {
+  opacity: 1;
+}
+
+.intentions__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 495px;
+  flex-shrink: 0;
+}
+
+.intention {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intention__label {
+  width: 186px;
+  margin: 0;
+  font: var(--type-text-l);
+  color: var(--text-white-60);
+}
+
+/* Element_Card_Row: icon card + label card */
+.intention__row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-base);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  /* Dim until hovered or chosen */
+  opacity: 0.3;
+  transition:
+    opacity 900ms var(--ease-soft),
+    transform 900ms var(--ease-soft);
+}
+
+.intention__row:not(:disabled):hover {
+  opacity: 0.6;
+}
+
+/* Chosen: full brightness and slightly bigger, like the chosen theme orb */
+.intention__row[aria-checked="true"] {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Not available yet: stays dim and doesn't react */
+.intention__row:disabled {
+  cursor: default;
+}
+
+.intention__icon-card,
+.intention__label-card {
+  position: relative;
+  display: flex;
+  height: 66px;
+  overflow: hidden;
+  border: 1px solid var(--stroke-low);
+  box-shadow: var(--shadow-universal-art);
+  background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, var(--intention-shade, 0.8)) 16.913%, rgba(0, 0, 0, 0) 78.194%),
+    var(--intention-image);
+  background-size: cover, cover;
+  background-position: center, center;
+  transition:
+    border-color 900ms var(--ease-soft),
+    box-shadow 900ms var(--ease-soft);
+}
+
+.intention__icon-card {
+  width: 68px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-large) 0 0 var(--radius-large);
+}
+
+.intention__icon-card img {
+  display: block;
+  filter: drop-shadow(var(--shadow-universal-art));
+}
+
+.intention__label-card {
+  width: 264px;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 0 var(--radius-large) var(--radius-large) 0;
+}
+
+.intention__name {
+  width: 99px;
+  font: var(--type-display-medium);
+  color: var(--text-white-100);
+  text-align: left;
+  text-shadow: var(--shadow-universal-art);
+}
+
+.intention__row:focus-visible {
+  outline: 2px solid var(--stroke-border-active);
+  outline-offset: 3px;
+  border-radius: var(--radius-large);
+}
+
+/* Pictures (fill styles "Image / Focus Mode / Dark / …") */
+.intention__row--water { --intention-image: url("../../assets/images/element-water-bg.png"); }
+.intention__row--metal { --intention-image: url("../../assets/images/element-metal-bg.png"); }
+.intention__row--earth { --intention-image: url("../../assets/images/element-earth-bg.png"); }
+.intention__row--fire { --intention-image: url("../../assets/images/element-fire-bg.png"); }
+
+/* Air uses a closer crop of its picture and no dark shade */
+.intention__row--air {
+  --intention-image: url("../../assets/images/element-air-bg.png");
+  --intention-shade: 0;
+}
+
+.intention__row--air .intention__icon-card,
+.intention__row--air .intention__label-card {
+  background-size: cover, 100% 862.75%;
+  background-position: center, 0 63.8%;
+}
+
+/* Light theme: the light photos of ONB_11B (Figma 3042:12423), a softer shade, no special Air crop */
+.intentions--light .intention__row { --intention-shade: 0.5; }
+.intentions--light .intention__row--water { --intention-image: url("../../assets/images/element-water-light-card.jpg"); }
+.intentions--light .intention__row--air { --intention-image: url("../../assets/images/element-air-light-card.jpg"); }
+.intentions--light .intention__row--metal { --intention-image: url("../../assets/images/element-metal-light-card.jpg"); }
+.intentions--light .intention__row--earth { --intention-image: url("../../assets/images/element-earth-light-card.jpg"); }
+.intentions--light .intention__row--fire { --intention-image: url("../../assets/images/element-fire-light-card.jpg"); }
+
+.intentions--light .intention__row--air .intention__icon-card,
+.intentions--light .intention__row--air .intention__label-card {
+  background-size: cover, cover;
+  background-position: center, center;
+}
+
+/* Hover and chosen: the cards glow; a chosen card also gets a white ring.
+   The light pictures of ONB_11B are kept for the light theme. */
+.intention__row:not(:disabled):hover .intention__icon-card,
+.intention__row:not(:disabled):hover .intention__label-card {
+  box-shadow: var(--shadow-universal-art), var(--glow-white-neon);
+}
+
+.intention__row[aria-checked="true"] .intention__icon-card,
+.intention__row[aria-checked="true"] .intention__label-card {
+  border-color: var(--stroke-border-active);
+  box-shadow: var(--shadow-universal-art), 0 0 0 1px var(--stroke-border-active), 0 0 24px var(--effect-white-alpha-20);
+}
+
+/* The label above a card brightens with it */
+.intention__label {
+  transition:
+    color 900ms var(--ease-soft),
+    translate 900ms var(--ease-soft);
+}
+
+/* …and moves up a little when the card grows, so it doesn't touch it */
+.intention:has([aria-checked="true"]) .intention__label {
+  translate: 0 -6px;
+}
+
+.intention:has(.intention__row:not(:disabled):hover) .intention__label,
+.intention:has([aria-checked="true"]) .intention__label {
+  color: var(--text-white-100);
+}
+
+/* ---------- ONB_12 Ready To Begin ---------- */
+
+.ready__frame {
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Onboarding_Phone_Mockup: tall rounded photo, effect "Special / Photo Enhancement" */
+.ready__photo {
+  width: 260px;
+  height: 462px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  /* The chosen element's own photo (set in js/screens/ready.js) */
+  background: rgba(255, 255, 255, 0.06) center / cover no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-shadow:
+    inset 0 4px 4px var(--effect-black-alpha-25),
+    var(--shadow-dark-art);
+}
+
+.ready__frame .cta {
+  width: 100%;
+}
+
+.ready__title {
+  min-height: 129px;
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- Element screens: everything appears one after another, in 3D ----------
+   First only the background, then the sign, the card, the title, the text and the button */
+.element {
+  perspective: 900px;
+}
+
+.element.screen--enter-fade [data-enter] {
+  animation: rise-3d 1600ms cubic-bezier(0.25, 0.6, 0.3, 1) both;
+  animation-delay: calc(var(--t-duration) * 0.45 + var(--enter-index, 0) * 450ms);
+  transform-origin: 50% 100%;
+}
+
+@keyframes rise-3d {
+  from {
+    opacity: 0;
+    transform: translateY(18px) rotateX(14deg) scale(0.96);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .element.screen--enter-fade [data-enter] {
+    animation: none;
+  }
+}
+
+/* The card's backdrop is centred with a transform of its own, so it only fades in */
+.element.screen--enter-fade .element-card__bg[data-enter] {
+  animation-name: soft-appear;
+}
+
+@keyframes soft-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name__sun,
+  .welcome__sun {
+    animation: none;
+  }
+}
+
+/* Theme choice: the chosen orb's circle and sun turn slowly */
+.theme-orb[aria-checked="true"] .theme-orb__mandala {
+  /* It is lifted into place with translateY(-50%), so it turns inside the same transform
+     (turning it separately would swing it round a point beside it) */
+  animation: orb-turn 90s linear infinite;
+  animation-delay: var(--spin-delay, 0s);
+}
+
+@keyframes orb-turn {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
+}

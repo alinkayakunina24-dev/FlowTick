@@ -1,0 +1,119 @@
+/* ONB_02 Mandala Philosophy — Figma node 2938:5062 */
+
+.mandala {
+  background: var(--neutral-black-100) url("../../assets/images/splash-desert.png") center / cover no-repeat;
+}
+
+/* Mandala_Chart_Wrapper: 330×556, centered on the screen */
+.mandala__chart {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 330px;
+  height: 556px;
+}
+
+/* Mandala_Sacred_Geometry_Group: 330×330 glass circle, no fill;
+   the glass is drawn by LiquidGlass, see js/screens/mandala.js */
+.mandala__circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 330px;
+  height: 330px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+/* Mandala_Illustration (fill style "Image/Sun/Variant 3"), rotated 90° in Figma */
+.mandala__illustration {
+  display: block;
+  width: 330px;
+  height: 330px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+  /* The grid turns very slowly and stays faint, so the signs read clearly */
+  opacity: 0.4;
+  animation: mandala-turn 90s linear infinite;
+  animation-delay: var(--spin-delay, 0s);
+}
+
+/* The sun, grid and signs come in softly once the circle has grown into place */
+.mandala__art {
+  position: absolute;
+  inset: 0;
+}
+
+.mandala.screen--enter-fade .mandala__art {
+  animation: soft-appear 1500ms var(--ease-soft) both;
+  animation-delay: calc(var(--t-duration) * 0.45);
+}
+
+/* The sun stays bright white over the faint grid and turns with it */
+.mandala__sun-spin {
+  position: absolute;
+  top: 77px;
+  left: 77px;
+  width: 176px;
+  height: 176px;
+  pointer-events: none;
+  animation: mandala-turn 90s linear infinite;
+  animation-delay: var(--spin-delay, 0s);
+}
+
+@keyframes mandala-turn {
+  to { rotate: 360deg; }
+}
+
+/* The element signs stay still and upright while the mandala turns under them */
+.mandala__sign {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mandala__illustration,
+  .mandala__sun-spin {
+    animation: none;
+  }
+}
+
+/* The sun drawn in the middle of the illustration (about 176px across) */
+.mandala__sun-anchor {
+  position: absolute;
+  top: 77px;
+  left: 77px;
+  width: 176px;
+  height: 176px;
+  pointer-events: none;
+}
+
+/* Slogan_Description_Text: 330×86 box at y = 470, text centered in it */
+.mandala__slogan {
+  position: absolute;
+  top: 470px;
+  left: 0;
+  right: 0;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font: var(--type-display-medium);
+  color: var(--text-white-100);
+  text-align: center;
+}
+
+/* From the splash: no cross-fade of the whole screen, so the glass circle never dims —
+   it just grows from the splash circle into this one */
+.mandala--from-splash.screen--enter-fade,
+.mandala--from-splash.screen--enter-fade [data-enter],
+.mandala--from-splash.screen--enter-fade .mandala__art {
+  animation: none;
+}

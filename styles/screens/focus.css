@@ -1,0 +1,686 @@
+/* Focus session screens — js/screens/focus/sessions.js */
+
+.focus-screen {
+  background-color: #121309;
+  background-image: var(--app-bg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--text-white-100);
+  font: var(--type-text-s);
+}
+
+.focus-screen button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.focus-screen p {
+  margin: 0;
+}
+
+.focus-screen__inner {
+  position: absolute;
+  inset: 70px 0 44px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--gap-screen-edge);
+}
+
+.focus-screen__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-medium);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.focus-screen__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-base);
+  /* Same space as between the cards above */
+  padding-top: var(--gap-medium);
+}
+
+/* Header: back button, title, calendar icon */
+.focus-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-base);
+}
+
+.focus-head__title {
+  margin: 0;
+  font: var(--type-display-medium);
+  text-align: center;
+}
+
+/* Long scene names (Highland Meadow, Mountain Stream…) stay on one line */
+.focus-head__title--long {
+  font-size: calc(33px * var(--text-scale));
+  white-space: nowrap;
+}
+
+.icon-square {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--stroke-border-active);
+  border-radius: 11px;
+  background: var(--fill-dark-alpha-50);
+}
+
+.icon-square:hover {
+  background: var(--neutral-white-alpha-10);
+}
+
+/* Primary_Action_Button (session) */
+.btn-session {
+  width: 100%;
+  height: 56px;
+  border: 1px solid var(--stroke-border-active);
+  background: linear-gradient(to right, var(--gradient-blue-start), var(--gradient-blue-end) 52%);
+  font: var(--type-text-xl) !important;
+  transition: filter 300ms var(--ease-soft);
+}
+
+.btn-session:hover {
+  filter: brightness(1.25);
+}
+
+.chips--center {
+  justify-content: center;
+}
+
+.round-button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--stroke-border-active);
+  border-radius: 50%;
+  background: var(--fill-dark-alpha-50);
+  transition: background 300ms var(--ease-soft), transform 300ms var(--ease-soft);
+}
+
+.round-button:hover {
+  background: var(--neutral-white-alpha-10);
+  transform: scale(1.06);
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+
+/* ---------- Pomodoro ---------- */
+
+.timer-ring {
+  position: relative;
+  flex-shrink: 0;
+  width: 290px;
+  height: 290px;
+  /* The ring takes the free space around it, so the controls sit low, next to Start Timer */
+  margin: auto 0;
+}
+
+.timer-ring__sun {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 170px;
+  height: 170px;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  opacity: 0.12;
+}
+
+.timer-ring__svg {
+  position: absolute;
+  inset: 0;
+}
+
+.timer-ring__progress {
+  filter: drop-shadow(0 0 6px rgba(243, 226, 28, 0.35));
+}
+
+.timer-ring__text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.timer-ring__time {
+  font: var(--type-display-large);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.timer-ring__time:hover,
+.silence-time:hover,
+.player-ring__time:hover {
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.45);
+}
+
+.timer-ring__hint {
+  margin-top: -6px !important;
+  font: var(--type-text-xs);
+  color: var(--text-white-60);
+  letter-spacing: 0.05em;
+}
+
+.round-button--big {
+  width: 48px;
+  height: 48px;
+}
+
+.timer-ring__quote {
+  font: var(--type-display-small);
+  line-height: 1.5;
+}
+
+/* The ring breathes gently while the timer runs */
+.is-running .timer-ring__sun {
+  animation: slow-turn 120s linear infinite;
+}
+
+@keyframes slow-turn {
+  to { transform: translate(-50%, -50%) rotate(270deg); }
+}
+
+.timer-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-base);
+  width: 100%;
+}
+
+.timer-stats .card {
+  align-items: center;
+  gap: 2px;
+  padding: var(--gap-base);
+  text-align: center;
+}
+
+.timer-stats b {
+  font-weight: 400;
+}
+
+.timer-task {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 300ms var(--ease-soft);
+}
+
+.timer-task:hover:not(:disabled) {
+  border-color: var(--stroke-border-active);
+}
+
+.timer-task:disabled {
+  cursor: default;
+}
+
+.timer-task__empty {
+  color: var(--text-white-60);
+}
+
+.timer-task span {
+  color: var(--text-white-60);
+}
+
+.sound-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-base);
+  width: 100%;
+}
+
+.sound-row__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-white-60);
+}
+
+/* ---------- Silence Mode ---------- */
+
+.silence-orb {
+  position: relative;
+  flex-shrink: 0;
+  width: 290px;
+  height: 290px;
+  /* Centred in the free space; the time, chips and note sit low, next to the button */
+  margin: auto 0;
+}
+
+/* A violet circle that closes as the session goes on */
+/* Softer and see-through, so it stays in the background */
+.silence-orb__pie {
+  --done: 0deg;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(81, 18, 70, 0.85), rgba(55, 35, 160, 0.95) calc(360deg - var(--done)), transparent 0);
+  filter: drop-shadow(0 0 30px rgba(77, 56, 204, 0.3)) blur(1px);
+  opacity: 0.42;
+}
+
+.silence-orb__sun {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 180px;
+  height: 180px;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.is-running .silence-orb__sun {
+  animation: slow-turn 90s linear infinite;
+}
+
+.silence-time {
+  font: var(--type-display-large);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.silence-note {
+  max-width: 280px;
+  color: var(--text-white-60);
+  text-align: center;
+}
+
+.silence-title {
+  align-self: flex-start;
+  font: var(--type-display-medium);
+}
+
+/* ---------- Breath Work ---------- */
+
+.breath-orb {
+  --breath-time: 4s;
+  position: relative;
+  flex-shrink: 0;
+  width: 240px;
+  height: 240px;
+  /* Centred in the free space; text, cycles and patterns sit low, next to the button */
+  margin: auto 0;
+}
+
+/* Muted, matte orb with a grainy surface */
+.breath-orb__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(170, 205, 200, 0.55) 0%, rgba(46, 150, 165, 0.6) 30%, rgba(18, 85, 125, 0.7) 60%, rgba(5, 30, 70, 0.85) 100%);
+  box-shadow: 0 0 30px rgba(46, 150, 165, 0.2);
+  filter: saturate(0.7) brightness(0.8);
+  opacity: 0.85;
+  transform: scale(0.72);
+  transition: transform var(--breath-time) cubic-bezier(0.45, 0, 0.55, 1), box-shadow var(--breath-time) ease;
+}
+
+.breath-orb__grain {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+  transform: scale(0.72);
+  transition: transform var(--breath-time) cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+.breath-orb[data-phase="in"] .breath-orb__grain,
+.breath-orb[data-phase="hold"] .breath-orb__grain {
+  transform: scale(1);
+}
+
+.breath-orb__sun {
+  position: absolute;
+  inset: 35px;
+  width: 170px;
+  height: 170px;
+  opacity: 0.5;
+  transform: scale(0.72);
+  transform-origin: 50% 50%;
+  transition: transform var(--breath-time) cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+.breath-orb[data-phase="in"] .breath-orb__glow,
+.breath-orb[data-phase="hold"] .breath-orb__glow {
+  transform: scale(1);
+  box-shadow: 0 0 45px rgba(46, 150, 165, 0.3);
+}
+
+.breath-orb[data-phase="in"] .breath-orb__sun,
+.breath-orb[data-phase="hold"] .breath-orb__sun {
+  transform: scale(1);
+}
+
+/* The illustration's own picture is rotated to stand upright, without moving it */
+.breath-orb__sun {
+  rotate: -90deg;
+}
+
+.breath-text {
+  min-height: 76px;
+  font: var(--type-display-small);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.breath-cycles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+.breath-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.breath-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--neutral-white-alpha-20);
+  transition: background 400ms var(--ease-soft), box-shadow 400ms var(--ease-soft);
+}
+
+.breath-dots .is-done {
+  background: white;
+  box-shadow: var(--glow-white-neon);
+}
+
+/* Room for the chosen pattern to grow without being cut */
+.focus-screen--breathing .focus-screen__body {
+  overflow: visible;
+}
+
+.breath-patterns {
+  padding: 0 6px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-base);
+  width: 100%;
+}
+
+.breath-pattern {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  opacity: 0.55;
+  transition: opacity 400ms var(--ease-soft), transform 400ms var(--ease-soft);
+}
+
+.breath-pattern:hover {
+  opacity: 0.8;
+}
+
+.breath-pattern[aria-pressed="true"] {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.breath-pattern__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 6px 0;
+  border: 1px solid var(--stroke-low);
+  background: var(--el-gradient);
+  font: var(--type-display-small);
+}
+
+.breath-pattern__card b {
+  font-weight: 400;
+}
+
+.breath-pattern[aria-pressed="true"] .breath-pattern__card {
+  border-color: var(--stroke-border-active);
+  box-shadow: var(--glow-white-neon);
+}
+
+/* ---------- Nature Sounds ---------- */
+
+/* The gallery runs to the right edge of the screen: the next picture peeks in */
+.focus-screen--sounds .focus-screen__body {
+  overflow: visible;
+}
+
+.scenes {
+  flex-shrink: 0;
+  display: flex;
+  gap: 18px;
+  width: calc(100% + 2 * var(--gap-screen-edge));
+  /* Centred in the free space; the scene tags sit low, next to the button */
+  margin: auto calc(-1 * var(--gap-screen-edge));
+  padding: 10px 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+/* Spacers on both ends, so the first and last cards can stand in the middle of the screen
+   (percentages here are of the gallery's own width; minus the 18px gap) */
+.scenes::before,
+.scenes::after {
+  content: "";
+  flex: 0 0 calc(50% - 130px - 18px);
+}
+
+.scenes::-webkit-scrollbar {
+  display: none;
+}
+
+.scene {
+  position: relative;
+  flex-shrink: 0;
+  width: 260px;
+  height: 440px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background-position: center;
+  background-size: cover;
+  box-shadow: var(--shadow-dark-art);
+  scroll-snap-align: center;
+  overflow: hidden;
+  opacity: 0.6;
+  transform: scale(0.94);
+  transition: opacity 500ms var(--ease-soft), transform 500ms var(--ease-soft), border-color 500ms var(--ease-soft);
+}
+
+.scene.is-chosen {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--stroke-low);
+}
+
+.scene__name {
+  position: absolute;
+  left: 34px;
+  right: 34px;
+  bottom: 36px;
+  font: var(--type-display-medium);
+  /* Long names (Mountain Stream) break onto two lines instead of touching the rim */
+  line-height: 0.95;
+  text-wrap: balance;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Tags wrap onto rows inside the screen edges */
+.scene-tags {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-base);
+  width: 100%;
+}
+
+.scenes::-webkit-scrollbar {
+  display: none;
+}
+
+.scene-tags > * {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.scene-tag {
+  padding-inline: 10px !important;
+  padding: 4px 0;
+  border: 1px solid color-mix(in srgb, var(--el) 60%, transparent);
+  background: color-mix(in srgb, var(--el) 15%, rgba(5, 6, 17, 0.4));
+  opacity: 0.75;
+  transition: opacity 300ms var(--ease-soft), box-shadow 300ms var(--ease-soft);
+}
+
+.scene-tag[aria-pressed="true"] {
+  opacity: 1;
+  border-color: var(--stroke-border-active);
+  box-shadow: var(--glow-white-neon);
+}
+
+/* ---------- Scene player ---------- */
+
+.focus-screen--player {
+  background-size: cover;
+  background-position: center;
+  transition: background-image 800ms var(--ease-soft);
+}
+
+.player-ring {
+  position: relative;
+  width: 216px;
+  height: 216px;
+}
+
+.player-ring svg {
+  position: absolute;
+  inset: 0;
+}
+
+
+
+.player-ring__time {
+  cursor: pointer;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font: var(--type-display-large);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.player-quote {
+  font: var(--type-display-small);
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.player-volume {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-base);
+  width: 200px;
+}
+
+.player-volume input {
+  flex: 1;
+  accent-color: var(--gradient-earth-start);
+}
+
+/* The speaker is a mute button */
+.player-mute {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: -6px 0 -6px -6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background 300ms var(--ease-soft);
+}
+
+.player-mute:hover {
+  background: var(--neutral-white-alpha-10);
+}
+
+.player-volume.is-muted input {
+  opacity: 0.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-running .timer-ring__sun,
+  .is-running .silence-orb__sun {
+    animation: none;
+  }
+}
+
+/* The player's timer sits low on the screen, close to the button */
+.focus-screen--player .focus-screen__body {
+  justify-content: flex-end;
+  padding-bottom: var(--gap-medium);
+}
+
+/* Focus Mode cards: grow a little when pressed; text keeps its look */
+
+/* Scene videos (when a scene has one) */
+.scene__video,
+.player-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.player-video {
+  z-index: 0;
+  filter: brightness(0.8);
+}
+
+.focus-screen--player .focus-screen__inner {
+  z-index: 1;
+}
+
+/* Who recorded the scene's sound (required by the CC BY licences) */
+.player-credit {
+  margin: -6px 0 0;
+  color: var(--text-white-60);
+  font: var(--type-text-xs);
+  text-align: center;
+}

@@ -1,0 +1,21 @@
+<svg width="316" height="108" viewBox="0 0 316 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g font-family="Caudex, Georgia, serif" font-size="7" fill="white">
+<text x="0" y="34">24</text><text x="0" y="58">16</text><text x="0" y="82">08</text><text x="0" y="106">00</text>
+</g>
+<path fill-rule="evenodd" d="M17.77 55.42C42.29 55.42 42.29 46.33 66.81 46.33C91.33 46.33 91.33 27 115.85 27C140.37 27 140.37 62.25 164.89 62.25C189.40 62.25 189.40 65.66 213.92 65.66C238.44 65.66 238.44 52.01 262.96 52.01C287.48 52.01 287.48 78.16 312 78.16V100H17.77V55.42Z" fill="#35ABEB" fill-opacity="0.15"/>
+<path d="M17.77 55.42C42.29 55.42 42.29 46.33 66.81 46.33C91.33 46.33 91.33 27 115.85 27C140.37 27 140.37 62.25 164.89 62.25C189.40 62.25 189.40 65.66 213.92 65.66C238.44 65.66 238.44 52.01 262.96 52.01C287.48 52.01 287.48 78.16 312 78.16" stroke="#35ABEB" stroke-width="1.2"/>
+<path fill-rule="evenodd" d="M17.77 73.96C42.29 73.96 42.29 52.44 66.81 52.44C91.33 52.44 91.33 17 115.85 17C140.37 17 140.37 38.52 164.89 38.52C189.40 38.52 189.40 87.89 213.92 87.89C238.44 87.89 238.44 28.39 262.96 28.39C287.48 28.39 287.48 52.44 312 52.44V100H17.77V73.96Z" fill="url(#area)"/>
+<path d="M17.77 73.96C42.29 73.96 42.29 52.44 66.81 52.44C91.33 52.44 91.33 17 115.85 17C140.37 17 140.37 38.52 164.89 38.52C189.40 38.52 189.40 87.89 213.92 87.89C238.44 87.89 238.44 28.39 262.96 28.39C287.48 28.39 287.48 52.44 312 52.44" stroke="#947CE3" stroke-width="2"/>
+<circle cx="18.11" cy="74" r="2" fill="#947CE3"/>
+<circle cx="66.84" cy="52" r="2" fill="#947CE3"/>
+<circle cx="115.34" cy="16.5" r="3" fill="#947CE3" stroke="white"/>
+<circle cx="158.84" cy="38" r="2" fill="#947CE3"/>
+<circle cx="205.11" cy="83" r="2" fill="#947CE3"/>
+<circle cx="249.84" cy="40" r="2" fill="#947CE3"/>
+<circle cx="292.11" cy="41" r="2" fill="#947CE3"/>
+<defs>
+<linearGradient id="area" x1="164.9" y1="17" x2="164.9" y2="117" gradientUnits="userSpaceOnUse">
+<stop stop-color="#6B4DF2" stop-opacity="0.55"/><stop offset="0.5" stop-color="#6147E0" stop-opacity="0.28"/><stop offset="1" stop-color="#4D38CC" stop-opacity="0.02"/>
+</linearGradient>
+</defs>
+</svg>

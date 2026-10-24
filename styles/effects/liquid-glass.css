@@ -1,0 +1,51 @@
+/* Liquid glass — see js/effects/liquid-glass.js */
+
+.liquid-glass {
+  position: relative;
+  isolation: isolate;
+}
+
+/* The bent copy of the background, clipped to the glass shape */
+.liquid-glass__lens {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.liquid-glass__backdrop {
+  position: absolute;
+}
+
+/* Light rim (1px ring) */
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--liquid-glass-rim);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+/* A glass that slowly turns: only the picture inside it rotates, the content stays upright */
+.liquid-glass--turn > .liquid-glass__lens > .liquid-glass__backdrop {
+  animation: liquid-glass-turn 70s linear infinite;
+  animation-delay: var(--spin-delay, 0s);
+}
+
+@keyframes liquid-glass-turn {
+  to { rotate: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass--turn > .liquid-glass__lens > .liquid-glass__backdrop {
+    animation: none;
+  }
+}
+

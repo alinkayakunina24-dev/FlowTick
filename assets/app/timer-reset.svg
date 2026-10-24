@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Timer_Reset_Vector">
+<path d="M0 1C0 0.447715 0.447715 0 1 0C1.55228 0 2 0.447715 2 1V8C2 8.55228 1.55228 9 1 9C0.447715 9 0 8.55228 0 8V1Z" fill="white"/>
+<path d="M4 1C4 0.447715 4.44772 0 5 0C5.55228 0 6 0.447715 6 1V8C6 8.55228 5.55228 9 5 9C4.44772 9 4 8.55228 4 8V1Z" fill="white"/>
+</g>
+</svg>

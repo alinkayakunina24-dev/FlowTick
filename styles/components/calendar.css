@@ -1,0 +1,203 @@
+/* Calendar — js/components/calendar.js. The glass itself is .glass-panel (glass.css). */
+
+.calendar {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  font: var(--type-text-s);
+  color: var(--text-white-100);
+}
+
+.calendar button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Invisible layer: a tap outside the panel closes it */
+.calendar__outside {
+  position: absolute;
+  inset: 0;
+}
+
+/* A compact card under the header, styled like the app's cards */
+.calendar__panel {
+  position: absolute;
+  top: 128px;
+  left: 50%;
+  width: 312px;
+  margin-left: -156px;
+  max-height: calc(100% - 240px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px 14px;
+  border-radius: var(--radius-medium) !important;
+  border-color: var(--stroke-low);
+  background:
+    linear-gradient(var(--accent), var(--accent)),
+    rgba(12, 12, 16, 0.82) !important;
+  overflow-y: auto;
+  scrollbar-width: none;
+  animation: drop-in 500ms var(--ease-soft) both;
+}
+
+.calendar--closing .calendar__panel {
+  animation: lift-out 400ms var(--ease-soft) both;
+}
+
+.calendar__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendar__nav button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: none;
+  font: var(--type-text-xxl) !important;
+  color: var(--text-white-60) !important;
+}
+
+.calendar__nav button:hover {
+  color: var(--text-white-100) !important;
+}
+
+.calendar__title {
+  margin: 0;
+  font: 400 30px / 1 var(--font-display);
+}
+
+.calendar__title span {
+  font: var(--type-text-l);
+  color: var(--text-white-60);
+}
+
+.calendar__weekdays,
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+}
+
+.calendar__weekdays {
+  font: var(--type-text-xs);
+  color: var(--text-white-60);
+}
+
+.calendar__grid {
+  row-gap: 0;
+  touch-action: pan-y;
+}
+
+.calendar__nav button {
+  width: 26px !important;
+  height: 26px !important;
+}
+
+.cal-day {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: none;
+  font: var(--type-text-s) !important;
+  transition: background 300ms var(--ease-soft), border-color 300ms var(--ease-soft);
+}
+
+.cal-day--blank {
+  visibility: hidden;
+}
+
+.cal-day.is-future {
+  color: var(--text-white-60) !important;
+}
+
+.cal-day:hover {
+  background: var(--neutral-white-alpha-10);
+}
+
+.cal-day.is-today {
+  border-color: var(--stroke-low);
+  background: var(--accent);
+  box-shadow: var(--shadow-universal-art);
+}
+
+.cal-day.is-selected {
+  border-color: var(--stroke-border-active);
+  box-shadow: var(--glow-white-neon);
+}
+
+.cal-day__dot {
+  position: absolute;
+  bottom: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--m);
+}
+
+.cal-day__dot--plan {
+  background: var(--text-white-60);
+}
+
+/* The plan of the tapped day */
+.calendar__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-base);
+}
+
+.calendar__details[hidden] {
+  display: none;
+}
+
+.calendar__day-title {
+  margin: 0;
+  font: 400 22px / 1.2 var(--font-display);
+}
+
+.calendar__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cal-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-base);
+  padding: 7px var(--gap-base);
+  border: 1px solid var(--neutral-white-alpha-20);
+  border-radius: var(--radius-medium);
+  background: rgba(5, 6, 17, 0.25);
+}
+
+.cal-item__bar {
+  align-self: stretch;
+  width: 3px;
+  border-radius: var(--radius-small);
+  background: var(--el);
+}
+
+.cal-item__time {
+  flex-shrink: 0;
+  width: 56px;
+  color: var(--text-white-60);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calendar__panel,
+  .calendar--closing .calendar__panel {
+    animation: none;
+  }
+}

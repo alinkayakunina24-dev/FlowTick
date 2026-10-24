@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a0d05" />
+  <title>Shine</title>
+
+  <!-- Fonts from the design: Allison (display) and Caudex (text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Allison&family=Caudex:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Lora&family=Playfair+Display&family=EB+Garamond&family=Crimson+Text&family=Libre+Baskerville&family=Marcellus&family=Great+Vibes&family=Parisienne&family=Dancing+Script&family=Pinyon+Script&family=Italianno&family=Alex+Brush&family=Tangerine&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/tokens.css?v=155" />
+  <link rel="stylesheet" href="styles/base.css?v=155" />
+  <link rel="stylesheet" href="styles/effects/liquid-glass.css?v=155" />
+  <link rel="stylesheet" href="styles/components.css?v=155" />
+  <link rel="stylesheet" href="styles/components/glass.css?v=155" />
+  <link rel="stylesheet" href="styles/components/calendar.css?v=155" />
+  <link rel="stylesheet" href="styles/screens/splash.css?v=155" />
+  <link rel="stylesheet" href="styles/screens/mandala.css?v=155" />
+  <link rel="stylesheet" href="styles/screens/onboarding.css?v=155" />
+  <link rel="stylesheet" href="styles/screens/app.css?v=155" />
+  <link rel="stylesheet" href="styles/screens/focus.css?v=155" />
+  <link rel="stylesheet" href="styles/screens/settings.css?v=155" />
+  <link rel="stylesheet" href="styles/themes.css?v=155" />
+</head>
+<body>
+  <!-- On a phone the app fills the screen; on a computer it is shown inside a 402×874 phone frame -->
+  <div class="device">
+    <div class="status-bar" aria-hidden="true">
+      <span class="status-bar__time">9:41</span>
+      <span class="status-bar__island"></span>
+      <img class="status-bar__signal" src="assets/icons/status-signal.svg" width="83.3417" height="13" alt="" />
+    </div>
+
+    <main id="app"></main>
+
+    <div class="home-indicator" aria-hidden="true"><span class="home-indicator__bar"></span></div>
+  </div>
+
+  <!-- Screens register themselves first, then the app starts -->
+  <script src="js/effects/liquid-glass.js?v=155"></script>
+  <script src="js/store.js?v=155"></script>
+  <script src="js/data.js?v=155"></script>
+  <script src="js/theme.js?v=155"></script>
+  <script src="js/sound.js?v=155"></script>
+  <script src="js/ui.js?v=155"></script>
+  <script src="js/components/notice.js?v=155"></script>
+  <script src="js/components/modal.js?v=155"></script>
+  <script src="js/components/calendar.js?v=155"></script>
+  <script src="js/components/drawer.js?v=155"></script>
+  <script src="js/screens/splash.js?v=155"></script>
+  <script src="js/screens/mandala.js?v=155"></script>
+  <script src="js/screens/name.js?v=155"></script>
+  <script src="js/screens/welcome.js?v=155"></script>
+  <script src="js/screens/elements.js?v=155"></script>
+  <script src="js/screens/theme.js?v=155"></script>
+  <script src="js/screens/intentions.js?v=155"></script>
+  <script src="js/screens/ready.js?v=155"></script>
+  <script src="js/screens/app/shell.js?v=155"></script>
+  <script src="js/screens/app/home.js?v=155"></script>
+  <script src="js/screens/app/dashboard.js?v=155"></script>
+  <script src="js/screens/app/analytics.js?v=155"></script>
+  <script src="js/screens/app/focus.js?v=155"></script>
+  <script src="js/screens/app/journal.js?v=155"></script>
+  <script src="js/screens/focus/sessions.js?v=155"></script>
+  <script src="js/screens/settings/settings.js?v=155"></script>
+  <script src="js/app.js?v=155"></script>
+</body>
+</html>
